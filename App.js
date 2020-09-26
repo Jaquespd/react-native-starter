@@ -1,27 +1,24 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from './src/redux/store';
+
+import Routes from './src/routes';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 const App = () => {
   return (
-    <>
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Wellcome</Text>
-      </View>
-    </>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Routes />
+      </PersistGate>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#000',
-  },
-});
 
 export default App;
