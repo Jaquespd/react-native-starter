@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -14,7 +7,7 @@ import {
 } from '@react-navigation/drawer';
 import { useDispatch } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icons from 'react-native-vector-icons/Ionicons';
 import Animated from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTheme, Drawer, TouchableRipple, Switch } from 'react-native-paper';
@@ -22,6 +15,7 @@ import { useTheme, Drawer, TouchableRipple, Switch } from 'react-native-paper';
 import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 import SupportScreen from './SupportScreen';
+import NewLoginScreen from './NewLoginScreen';
 
 import { auth } from '../redux/actions';
 
@@ -36,9 +30,9 @@ const Screens = ({ navigation, style }) => {
           headerTransparent: true,
           headerTitle: null,
           headerLeft: () => (
-            <View>
+            <View style={{ marginLeft: 10 }}>
               <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                <Icon name="home-outline" color="red" size={32} />
+                <Icons name="menu-outline" color="white" size={32} />
               </TouchableOpacity>
             </View>
           ),
@@ -46,13 +40,14 @@ const Screens = ({ navigation, style }) => {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Support" component={SupportScreen} />
+        <Stack.Screen name="NewLogin" component={NewLoginScreen} />
       </Stack.Navigator>
     </Animated.View>
   );
 };
 
 const DrawerContent = (props) => {
-  const paperTheme = useTheme();
+  const { dark, colors } = useTheme();
   const dispatch = useDispatch();
 
   return (
@@ -68,63 +63,99 @@ const DrawerContent = (props) => {
               }}
               style={{ borderRadius: 30 }}
             />
-            <Text style={{ marginTop: 10, color: 'white' }}>
+            <Text style={{ marginTop: 10, color: colors.textMenu }}>
               Jaques Pereira Delgado
             </Text>
-            <Text>jaquespd@gmail.com</Text>
+            <Text style={{ color: colors.textMenu }}>jaquespd@gmail.com</Text>
           </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               label="Profile"
-              labelStyle={{ marginLeft: -24, fontSize: 14, color: 'white' }}
+              labelStyle={{
+                marginLeft: -24,
+                fontSize: 14,
+                color: colors.textMenu,
+              }}
               onPress={() => props.navigation.navigate('Profile')}
-              icon={() => <Icon name="home-outline" size={20} color="white" />}
+              icon={() => (
+                <Icons
+                  name="person-circle-outline"
+                  size={18}
+                  color={colors.textMenu}
+                />
+              )}
             />
             <DrawerItem
               label="Home"
-              labelStyle={{ marginLeft: -16, fontSize: 14, color: 'white' }}
+              labelStyle={{
+                marginLeft: -24,
+                fontSize: 14,
+                color: colors.textMenu,
+              }}
               onPress={() => props.navigation.navigate('Home')}
               icon={() => (
-                <Icon name="account-outline" size={30} color="white" />
+                <Icons name="home-outline" size={18} color={colors.textMenu} />
               )}
             />
             <DrawerItem
               label="Support"
-              labelStyle={{ marginLeft: -16, fontSize: 14, color: 'white' }}
+              labelStyle={{
+                marginLeft: -24,
+                fontSize: 14,
+                color: colors.textMenu,
+              }}
               onPress={() => props.navigation.navigate('Support')}
               icon={() => (
-                <Icon name="bookmark-outline" size={30} color="white" />
+                <Icons
+                  name="settings-outline"
+                  size={18}
+                  color={colors.textMenu}
+                />
               )}
             />
             <DrawerItem
-              label="Support"
-              labelStyle={{ marginLeft: -16, fontSize: 14, color: 'white' }}
-              onPress={() => props.navigation.navigate('Support')}
+              label="NewLogin"
+              labelStyle={{
+                marginLeft: -24,
+                fontSize: 14,
+                color: colors.textMenu,
+              }}
+              onPress={() => props.navigation.navigate('NewLogin')}
               icon={() => (
-                <Icon name="account-check-outline" size={30} color="white" />
+                <Icons
+                  name="ios-logo-instagram"
+                  size={18}
+                  color={colors.textMenu}
+                />
               )}
             />
           </Drawer.Section>
-          <Drawer.Section title="Preferences">
+          <Drawer.Section>
             <TouchableRipple onPress={() => dispatch(auth.toggleTheme())}>
               <View style={styles.preference}>
-                <Text style={{ color: 'white' }}>Dark Theme</Text>
+                <Text style={{ color: colors.textMenu }}>Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={paperTheme.dark} />
+                  <Switch value={dark} />
                 </View>
               </View>
             </TouchableRipple>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
-      <Drawer.Section style={styles.bottomDrawerSection}>
+      <Drawer.Section
+        style={{
+          ...styles.bottomDrawerSection,
+          borderTopColor: colors.textMenu,
+        }}>
         <DrawerItem
           label="Sing Out"
-          labelStyle={{ marginLeft: -16, fontSize: 14, color: 'white' }}
+          labelStyle={{ marginLeft: -24, fontSize: 14, color: colors.textMenu }}
           onPress={() => {
             dispatch(auth.signOut());
           }}
-          icon={() => <Icon name="exit-to-app" size={30} color="white" />}
+          icon={() => (
+            <Icons name="log-out-outline" size={18} color={colors.textMenu} />
+          )}
         />
       </Drawer.Section>
     </View>
@@ -211,7 +242,6 @@ const styles = StyleSheet.create({
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderTopColor: '#f4f4f4',
     borderTopWidth: 1,
   },
   drawerStyles: { flex: 1, width: '50%', backgroundColor: 'transparent' },

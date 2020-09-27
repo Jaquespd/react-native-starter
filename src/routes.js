@@ -43,6 +43,8 @@ const Routes = () => {
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
       text: '#333333',
+      textMenu: '#ffffff',
+      iconColor: '#ffffff',
     },
   };
 
@@ -54,6 +56,8 @@ const Routes = () => {
       ...PaperDarkTheme.colors,
       background: '#333333',
       text: '#ffffff',
+      textMenu: '#000000',
+      iconColor: '#000000',
     },
   };
 

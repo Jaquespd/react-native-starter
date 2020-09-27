@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           packages.add(new LottiePackage());
           // packages.add(new VectorIconsPackage());
+          // new SvgPackage()
           
           return packages;
         }

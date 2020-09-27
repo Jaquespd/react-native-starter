@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -17,17 +17,17 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import LottieView from 'lottie-react-native';
 
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {useTheme} from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
-import {auth} from '../redux/actions';
+import { auth } from '../redux/actions';
 
 // import {AuthContext} from '../components/context';
 
 // import Users from '../model/users';
 
-const SignInScreen = ({navigation, route}) => {
+const SignInScreen = ({ navigation, route }) => {
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -40,7 +40,7 @@ const SignInScreen = ({navigation, route}) => {
 
   const dispatch = useDispatch();
 
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   // const {signIn} = React.useContext(AuthContext);
 
@@ -131,7 +131,7 @@ const SignInScreen = ({navigation, route}) => {
 
   if (loading) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <LottieView
           source={require('../assets/loading-40-paperplane.json')}
           autoPlay
@@ -146,7 +146,7 @@ const SignInScreen = ({navigation, route}) => {
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
 
       <View style={styles.header}>
-        <Text style={styles.text_header}>Welcome!</Text>
+        <Text style={styles.text_header}>Wellcome!</Text>
       </View>
       <Animatable.View
         animation="fadeInUpBig"
@@ -235,7 +235,7 @@ const SignInScreen = ({navigation, route}) => {
           </Animatable.View>
         )}
         <TouchableOpacity>
-          <Text style={{color: '#009387', marginTop: 15}}>
+          <Text style={{ color: '#009387', marginTop: 15 }}>
             Forgot password?
           </Text>
         </TouchableOpacity>
